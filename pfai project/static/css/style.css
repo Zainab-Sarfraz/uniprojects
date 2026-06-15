@@ -1,0 +1,211 @@
+/* --- DESIGN SYSTEM VARIABLES --- */
+:root {
+    --bg-color: #f0f4f8;
+    --chat-bg: #ffffff;
+    --primary: #2b6cb0;
+    --primary-light: #ebf8ff;
+    --text-main: #2d3748;
+    --text-muted: #718096;
+    --border: #e2e8f0;
+    --user-msg: #2b6cb0;
+    --sys-msg: #f7fafc;
+}
+
+/* --- BASE STYLES & RESET --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* --- MAIN LAYOUT WINDOW --- */
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    height: 90vh;
+    background: var(--chat-bg);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- HEADER SECTION --- */
+.chat-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Keeps titles left and voice toggle right */
+}
+
+.chat-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Header Voice Button Specific Override */
+#voice-toggle-btn {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+}
+
+#voice-toggle-btn.muted {
+    opacity: 0.5;
+}
+
+/* --- CHAT HISTORY VIEW SCREEN --- */
+.chat-window {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    background-color: var(--chat-bg);
+}
+
+/* --- CHAT BUBBLES --- */
+.message {
+    max-width: 80%;
+    padding: 0.9rem 1.2rem;
+    border-radius: 16px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    word-wrap: break-word;
+}
+
+.system-msg {
+    background-color: var(--sys-msg);
+    color: var(--text-main);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.user-msg {
+    background-color: var(--user-msg);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+/* --- INTERACTIVE HORIZONTAL ROW FOOTER --- */
+.chat-input-area {
+    padding: 1rem;
+    background: var(--chat-bg);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;  /* Aligns mic, text box, and send button vertically inline */
+    gap: 0.75rem;         /* Clean, consistent spacing between items */
+}
+
+#user-input {
+    flex: 1;              /* Automatically fills all empty horizontal center space */
+    padding: 0.8rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 24px;  /* Creates a modern capsule structure */
+    outline: none;
+    font-size: 0.95rem;
+    background: var(--sys-msg);
+    color: var(--text-main);
+    transition: all 0.2s ease;
+}
+
+#user-input:focus {
+    border-color: var(--primary);
+    background: var(--chat-bg);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
+}
+
+/* --- CONTROLLER BUTTONS --- */
+.icon-btn, #mic-btn, #send-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;   /* Forces absolute circular symmetry */
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    flex-shrink: 0;       /* Disallows buttons to squeeze or deform when sizing scales */
+}
+
+/* Microphone Default State */
+#mic-btn {
+    background-color: #f1f5f9;
+    color: var(--text-muted);
+}
+
+#mic-btn:hover {
+    background-color: #e2e8f0;
+    color: var(--text-main);
+}
+
+/* Microphone Active Pulse State */
+#mic-btn.recording {
+    background-color: #ffe4e6;
+    color: #e11d48;
+    animation: pulse 1.5s infinite;
+}
+
+/* Send Button Default State */
+#send-btn {
+    background-color: var(--primary);
+    color: white;
+}
+
+#send-btn:hover {
+    background-color: #235a91;
+    transform: translateY(-1px);
+}
+
+#send-btn:active {
+    transform: translateY(0);
+}
+
+/* --- KEYFRAME ANIMATIONS --- */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+    100% { transform: scale(1); }
+}
+
+/* --- FOOTER TRADEMARK BRANDING --- */
+.app-footer {
+    padding-bottom: 0.8rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    background-color: var(--chat-bg);
+}
+
+.app-footer .heart {
+    color: #e11d48;
+    font-size: 0.85rem;
+}
